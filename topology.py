@@ -1,9 +1,12 @@
 from mininet.topo import Topo
 
 
+# usg: sudo mn --custom 'topology.py' --topo topology,switches ...
 class Topology(Topo):
 
-    def build(self, switches=2):
+    def __init__(self, switches=2):
+
+        Topo.__init__(self, switches)
 
         print("[DEBUG] Creando topologia...")
         print("[DEBUG] switches = ", switches)
@@ -35,10 +38,9 @@ class Topology(Topo):
             self.addLink(switch_list[i], hosts_list[2*i+1])
 
         # Unimos los switches
-        for s in range(switches):
+        for s in range(1, switches):
 
-            if s > 0:
-                self.addLink(switch_list[s-1], switch_list[s])
+            self.addLink(switch_list[s-1], switch_list[s])
 
 
-topos = {'topology': (lambda: Topology())}
+topos = {'topology': Topology}
