@@ -23,16 +23,12 @@ class Topology(Topo):
             print("[DEBUG] i = ", i)
             switch_list.append(self.addSwitch("s" + str(i+1)))
 
-            if i == 0:
-                hosts_list.append(self.addHost("h" + str(1)))
-                hosts_list.append(self.addHost("h" + str(2)))
-
-            else:
-                hosts_list.append(self.addHost("h" + str(2**i + 1)))
-                hosts_list.append(self.addHost("h" + str(2**i + 2)))
+            hosts_list.append(self.addHost("h" + str(2*i + 1)))
+            hosts_list.append(self.addHost("h" + str(2*i + 2)))
 
             print("[DEBUG] switch_list = ", switch_list)
             print("[DEBUG] hosts_list = ", hosts_list)
+
             # Unimos los hosts al nuevo switch
             self.addLink(switch_list[i], hosts_list[2*i])
             self.addLink(switch_list[i], hosts_list[2*i+1])
