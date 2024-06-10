@@ -17,26 +17,30 @@ class Topology(Topo):
         switch_list = []
         hosts_list = []
 
-        # Creamos los switches y los hosts
+        # Creamos los switches
         for i in range(switches):
 
             print("[DEBUG] i = ", i)
             switch_list.append(self.addSwitch("s" + str(i+1)))
 
-            hosts_list.append(self.addHost("h" + str(2*i + 1)))
-            hosts_list.append(self.addHost("h" + str(2*i + 2)))
+            # Unimos los switches de manera line
+            if i > 0:
+                self.addLink(switch_list[i - 1], switch_list[i])
 
-            print("[DEBUG] switch_list = ", switch_list)
-            print("[DEBUG] hosts_list = ", hosts_list)
+        # Creamos los hosts
+        hosts_list.append(self.addHost("h1"))
+        hosts_list.append(self.addHost("h2"))
+        hosts_list.append(self.addHost("h3"))
+        hosts_list.append(self.addHost("h4"))
 
-            # Unimos los hosts al nuevo switch
-            self.addLink(switch_list[i], hosts_list[2*i])
-            self.addLink(switch_list[i], hosts_list[2*i+1])
+        print("[DEBUG] switch_list = ", switch_list)
+        print("[DEBUG] hosts_list = ", hosts_list)
 
-        # Unimos los switches
-        for s in range(1, switches):
-
-            self.addLink(switch_list[s-1], switch_list[s])
+        # Unimos los hosts al primer y ultimo switch
+        self.addLink(switch_list[0], hosts_list[0])
+        self.addLink(switch_list[0], hosts_list[1])
+        self.addLink(switch_list[switches - 1], hosts_list[2])
+        self.addLink(switch_list[switches - 1], hosts_list[3])
 
 
 topos = {'topology': Topology}
