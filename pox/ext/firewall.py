@@ -56,7 +56,8 @@ class Firewall (EventMixin):
                                                                  dl_type=IPV4_TYPE,
                                                                  nw_src=IPAddr('10.0.0.3'),
                                                                  nw_dst=IPAddr('10.0.0.2'))))
-        log.debug("Firewall rules installed on %s", dpidToStr(event.dpid))
+
+        log.debug("[DEBUG] Firewall rules installed on %s", dpidToStr(event.dpid))
 
 
 def launch():
