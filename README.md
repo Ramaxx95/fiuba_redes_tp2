@@ -28,7 +28,7 @@ Para este tipo de pruebas se usa la herramienta ***iperf*** que la vamos a levan
 > 
 > `iperf3 -s -p [numero de puerto a recibir mensajes]`
 > 
-> O un cliente:
+> O un cliente (opcionalmente se usa "-u" en caso de usar protocolo UDP):
 > 
 > `iperf3 -c [ip host servidor] -p [numero de puerto] [-u]`  
 
